@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Diwali Link Maker (private)</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#1d0a33">
+<style>
+:root{--gold:#f6d88b;--champ:#f7e7c1;--rose:#e8b4a0;--serif:'Cormorant Garamond','Palatino Linotype',Palatino,Georgia,serif}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{min-height:100vh;min-height:100dvh;font-family:var(--serif);color:var(--champ);background:radial-gradient(ellipse at 50% 0,#4a1240 0,#2c0f48 40%,#0d0618 100%) fixed;padding:max(18px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(40px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+.box{max-width:640px;margin:0 auto}
+h1{font-size:clamp(1.7rem,6vw,2.4rem);text-align:center;margin:.4rem 0 .3rem;background:linear-gradient(100deg,#f7e7c1,#f6d88b,#e8b4a0,#f6d88b);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{text-align:center;font-style:italic;font-size:1.1rem;opacity:.9;margin-bottom:1rem}
+.warn{border:1px solid rgba(255,150,150,.55);background:rgba(120,20,40,.45);border-radius:14px;padding:.8rem 1rem;font-size:1rem;line-height:1.45;margin-bottom:1.1rem}
+.card{background:linear-gradient(160deg,rgba(90,18,48,.6),rgba(29,10,51,.75));border:1px solid rgba(246,216,139,.35);border-radius:20px;padding:1.2rem;box-shadow:0 14px 40px rgba(0,0,0,.45)}
+label{display:block;font-weight:700;font-size:1.05rem;margin:1rem 0 .35rem;color:var(--gold)}
+label small{font-weight:400;font-style:italic;color:var(--rose);margin-left:.3rem}
+input,select,textarea{width:100%;font:inherit;font-size:1.1rem;color:#fff8e8;background:rgba(13,6,24,.65);border:1px solid rgba(246,216,139,.4);border-radius:12px;padding:.8rem .9rem;min-height:48px;outline:none;-webkit-appearance:none;appearance:none}
+select{background-image:linear-gradient(45deg,transparent 50%,var(--gold) 50%),linear-gradient(135deg,var(--gold) 50%,transparent 50%);background-position:calc(100% - 20px) 55%,calc(100% - 14px) 55%;background-size:6px 6px;background-repeat:no-repeat;padding-right:2.2rem}
+select option{color:#222}
+textarea{min-height:130px;resize:vertical;line-height:1.5}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(246,216,139,.25)}
+.count{text-align:right;font-size:.85rem;opacity:.7;margin-top:.2rem}
+.hint{font-size:.95rem;opacity:.8;font-style:italic;margin-top:.3rem}
+.btn{display:block;width:100%;min-height:50px;margin-top:1rem;padding:.85rem 1.2rem;font:700 1.15rem var(--serif);color:#3a0a1d;border:0;border-radius:60px;cursor:pointer;background:linear-gradient(120deg,#f7e7c1,#f6d88b 45%,#e8b4a0);box-shadow:0 6px 22px rgba(246,216,139,.3);text-align:center;text-decoration:none}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:transparent;color:var(--champ);box-shadow:0 0 0 1.5px rgba(246,216,139,.6) inset}
+.btn.wa{background:linear-gradient(120deg,#9ff0b8,#4fd17c);color:#06361a}
+#out{display:none;margin-top:1.2rem}
+#out.show{display:block}
+#link{font-size:.95rem;min-height:110px;word-break:break-all;color:#fff3c8}
+.row{display:grid;gap:.1rem}
+.ok{color:#9ff0b8;text-align:center;margin-top:.6rem;min-height:1.4rem}
+.err{color:#ffb4b4;margin-top:.6rem;min-height:1.2rem}
+@media(min-width:560px){.row{grid-template-columns:1fr 1fr;gap:.2rem 1rem}}
+</style>
+</head>
+<body>
+<div class="box">
+  <h1>Diwali Link Maker ✨</h1>
+  <p class="lead">Make a personal Diwali link for each person.</p>
+  <div class="warn">🔒 <b>This page is only for you.</b> Keep this file on your phone or laptop. <b>Do NOT upload it to GitHub</b>, and never send it to anyone. Upload only <b>index.html</b>.</div>
+
+  <form class="card" id="f" autocomplete="off" novalidate>
+    <label for="base">Your website address <small>(where index.html is published)</small></label>
+    <input id="base" type="text" inputmode="url" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="https://yourname.github.io/diwali/">
+    <p class="hint">Paste it once. It is remembered on this device. Leave empty to test on your own device.</p>
+
+    <label for="name">Their name</label>
+    <input id="name" maxlength="40" placeholder="e.g. Kunnu">
+
+    <label for="rel">Who are they to you?</label>
+    <select id="rel">
+      <option value="friend">Friend</option>
+      <option value="best">Best Friend</option>
+      <option value="teacher">Teacher</option>
+      <option value="family">Family</option>
+      <option value="special">Special Person</option>
+      <option value="custom">Custom (anyone else)</option>
+    </select>
+
+    <label for="nick">Nickname <small>(optional)</small></label>
+    <input id="nick" maxlength="30" placeholder="e.g. Kunnu bestie. If filled, it is used in the greetings.">
+
+    <label for="msg">Your personal message</label>
+    <textarea id="msg" maxlength="700" placeholder="Write from your heart. This is shown inside the envelope, exactly as you type it."></textarea>
+    <div class="count"><span id="c1">0</span> / 700</div>
+
+    <label for="wish">A special Diwali wish <small>(optional)</small></label>
+    <textarea id="wish" maxlength="400" style="min-height:90px" placeholder="Leave empty and a warm wish for their relationship is written for you. Or write your own here."></textarea>
+    <div class="count"><span id="c2">0</span> / 400</div>
+
+    <button class="btn" type="submit">✨ Create Their Link</button>
+    <button class="btn ghost" type="button" id="clear">Start Fresh for Someone Else</button>
+    <p class="err" id="err"></p>
+  </form>
+
+  <div class="card" id="out">
+    <label for="link" style="margin-top:0">Their personal link</label>
+    <textarea id="link" readonly></textarea>
+    <div class="row">
+      <button class="btn" id="copy" type="button">📋 Copy Link</button>
+      <a class="btn ghost" id="open" target="_blank" rel="noopener">👀 Open &amp; Test</a>
+    </div>
+    <a class="btn wa" id="wa" target="_blank" rel="noopener">💬 Send on WhatsApp</a>
+    <p class="ok" id="ok"></p>
+    <p class="hint">This link shows only this person's greeting. Make a new link for every person.</p>
+  </div>
+</div>
+
+<script>
+(()=>{
+const $=s=>document.querySelector(s);
+const KEY='diwaliBaseUrl';
+try{const b=localStorage.getItem(KEY);if(b)$('#base').value=b}catch(e){}
+['msg','wish'].forEach((id,i)=>{const el=$('#'+id),c=$(i?'#c2':'#c1');const u=()=>c.textContent=el.value.length;el.addEventListener('input',u);u()});
+
+function enc(o){const bytes=new TextEncoder().encode(JSON.stringify(o));let bin='';for(let i=0;i<bytes.length;i++)bin+=String.fromCharCode(bytes[i]);
+  return btoa(bin).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+function baseUrl(){
+  let b=$('#base').value.trim();
+  if(!b){ // no address typed: link to the index.html sitting next to this file (works for testing)
+    return location.href.replace(/[?#].*$/,'').replace(/[^\/]*$/,'')+'index.html'}
+  if(!/^https?:\/\//i.test(b))b='https://'+b;
+  b=b.replace(/[?#].*$/,'');
+  if(!/\.html?$/i.test(b)&&!b.endsWith('/'))b+='/';
+  return b}
+$('#f').addEventListener('submit',e=>{
+  e.preventDefault();$('#err').textContent='';$('#ok').textContent='';
+  const name=$('#name').value.trim();
+  if(!name){$('#err').textContent='Please type their name first.';$('#name').focus();return}
+  const o={v:1,n:name,r:$('#rel').value};
+  const k=$('#nick').value.trim(),m=$('#msg').value.trim(),w=$('#wish').value.trim();
+  if(k)o.k=k;if(m)o.m=m;if(w)o.w=w;
+  try{const b=$('#base').value.trim();if(b)localStorage.setItem(KEY,b)}catch(e){}
+  const link=baseUrl()+'?d='+enc(o);
+  $('#link').value=link;
+  $('#open').href=link;
+  const first=(k||name).split(' ')[0];
+  $('#wa').href='https://wa.me/?text='+encodeURIComponent('Hi '+first+'! ✨ I made a little Diwali surprise just for you. Open it here:\n'+link);
+  $('#out').classList.add('show');
+  $('#out').scrollIntoView({behavior:'smooth',block:'start'})});
+$('#copy').addEventListener('click',async()=>{
+  const t=$('#link');let ok=false;
+  try{await navigator.clipboard.writeText(t.value);ok=true}catch(e){}
+  if(!ok){t.focus();t.select();t.setSelectionRange(0,t.value.length);try{ok=document.execCommand('copy')}catch(e){}}
+  $('#ok').textContent=ok?'Link copied! ✅ Now paste it in WhatsApp.':'Press and hold the link above, then choose Copy.'});
+$('#clear').addEventListener('click',()=>{['name','nick','msg','wish'].forEach(id=>$('#'+id).value='');$('#rel').value='friend';$('#c1').textContent=$('#c2').textContent='0';$('#out').classList.remove('show');$('#err').textContent='';$('#name').focus()});
+})();
+</script>
+</body>
+</html>
